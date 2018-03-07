@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StarWarsAPI</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<center>
+    <h1>STAR WARS iNFOCENTER</h1>
+    <img src="img/starwars.png" height="29%" width="29%">
+    <p></p>
+    What would you like to learn about:  <select id="resource" onchange="placeholder()">
+        <option value="films">Films</option>
+        <option value="planets">Planets</option>
+        <option value="people">People</option>
+        <option value="species">Species</option>
+        <option value="starships">Starships</option>
+        <option value="vehicles">Vehicles</option>
+
+    </select>
+    What is its name?  <input type="text" id="name" class="form-inline" placeholder="i.e. Return of the Jedi">
+    <p><button class="btn btn-default" onclick="requestAPI()">SEARCH</button></p>
+    <div id="message"></div></center>
+
+    <h6 id="header1" class="left"></h6>
+    <div id="info1" class="left"></div>
+    <div id="info2" class="left"></div>
+    <div id="info3" class="left"></div>
+    <div id="info4" class="left"></div>
+    <div id="info5" class="left"></div>
+    <div id="info6" class="left"></div>
+    <div id="info7" class="left"></div>
+
+
+</body>
+</html>
