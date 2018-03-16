@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<body>
-<center>
+<body><div id="center">
+
     <h1>STAR WARS iNFOCENTER</h1>
-    <img src="img/starwars.png" height="29%" width="29%">
+    <div id="banner"><img src="img/starwars.png" height="29%" width="29%"></div>
     <p></p>
-    What would you like to learn about:  <select id="resource" onchange="placeholder()">
+    What would you like to learn about:  <select id="resource" class="input" onchange="placeholder()">
         <option value="films">Films</option>
         <option value="planets">Planets</option>
         <option value="people">People</option>
@@ -23,19 +23,24 @@
         <option value="vehicles">Vehicles</option>
 
     </select>
-    What is its name?  <input type="text" id="name" class="form-inline" placeholder="i.e. Return of the Jedi">
+    What is its name?  <input type="text" id="name" class="form-inline input" placeholder="i.e. Return of the Jedi">
     <p><button class="btn btn-default" onclick="requestAPI()">SEARCH</button></p>
-    <div id="message"></div></center>
+    <div id="message"></div></div>
 
-    <h6 id="header1" class="left"></h6>
-    <div id="info1" class="left"></div>
-    <div id="info2" class="left"></div>
-    <div id="info3" class="left"></div>
-    <div id="info4" class="left"></div>
-    <div id="info5" class="left"></div>
-    <div id="info6" class="left"></div>
-    <div id="info7" class="left"></div>
-
+<table>
+    <tr><h4 id="header1"></h4>
+        <th><div id="info1"></div></th>
+        <th><div id="info2"></div></th></tr>
+    <tr>
+        <th><div id="info3"></div></th>
+        <th><div id="info4"></div></th>
+    </tr>
+    <tr>
+        <th><div id="info5"></div></th>
+        <th><div id="info6"></div></th>
+        <th><div id="info7"></div></th>
+    </tr>
+</table>
 
 </body>
 </html>

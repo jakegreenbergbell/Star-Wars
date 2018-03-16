@@ -35,107 +35,111 @@ function requestAPI(){
     });
 }
 
-function pushToArrayFILM(result) {
-    var masterArray = [];
-    var film = {
-        resource: $("#resource").val(),
-        output: ["#header1", "#info1", "#info2", "#info3", "#info4"],
-        labels: ["MOVIE INFO", "Director: ", "Title: ", "Producer(s): ", "Opening Crawl: "],
-        values: ["", result.director, result.title, result.producer, result.opening_crawl]
-    };
-
-    masterArray.push(film);
-
-    for (var item in masterArray) {
-        if (masterArray[item].resource == "films") {
-            for (var i = 0; i < masterArray[item].output.length; i++) {
-                $(masterArray[item].output[i]).html(masterArray[item].labels[i] + masterArray[item].values[i]);
-
+function specialCall(arr, type, completion) {
+    var name = "";
+    for( var i = 0; i < arr.length; i++){
+        runCall(arr[i], type, function (result) {
+            name += (result + ", ");
+            i--;
+            if(i == 0){
+                console.log(name);
+                completion(name);
             }
-        }
+        });
     }
+}
+
+    function runCall(url, type, completion) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (result) {
+                var name = result[type];
+                completion(name);
+            }
+        });
+
+    }
+
+
+function pushToArrayFILM(result) {
+    var masterArray = [{
+        resource: $("#resource").val(),
+        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5"],
+        labels: ["MOVIE INFO", "Episode: ", "Director: ", "Title: ", "Producer(s): ", "Characters: "],
+        values: ["", result.episode_id, result.director, result.title, result.producer]
+    }];
+    specialCall(result.characters, "name", function (result) {
+        masterArray[0].values.push(result);
+            for (var i = 0; i < masterArray[0].output.length; i++) {
+                $(masterArray[0].output[i]).html(masterArray[0].labels[i] + masterArray[0].values[i]);
+            }
+
+    });
 }
 
 function pushToArrayPLANETS(result){
-    var masterArray = [];
-    var planet = {
+    var masterArray = [{
         resource: $("#resource").val(),
-        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6"],
-        labels: ["PLANET INFO", "Name: ", "Climate: ", "Terrain: ", "Diameter: ", "Orbital Period: ", "Population: "],
-        values: ["", result.name, result.climate, result.terrain, result.diameter, result.orbital_period, result.population]
-    };
+        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6", "#info7"],
+        labels: ["PLANET INFO", "Name: ", "Climate: ", "Terrain: ", "Diameter: ", "Orbital Period: ", "Population: ", "Residents: "],
+        values: ["", result.name, result.climate, result.terrain, result.diameter, result.orbital_period, result.resident]
+    }];
 
-    masterArray.push(planet);
-
-    for (var item in masterArray) {
-        if (masterArray[item].resource == "planets") {
-            for (var i = 0; i < masterArray[item].output.length; i++) {
-                $(masterArray[item].output[i]).html(masterArray[item].labels[i] + masterArray[item].values[i]);
-
+    specialCall(result.residents, "name", function (result) {
+        masterArray[0].values.push(result);
+            for (var i = 0; i < masterArray[0].output.length; i++) {
+                $(masterArray[0].output[i]).html(masterArray[0].labels[i] + masterArray[0].values[i]);
             }
-        }
-    }
+    });
 }
 
 function pushToArrayPEOPLE(result) {
-    var masterArray = [];
-    var film = {
+    var masterArray = [{
         resource: $("#resource").val(),
-        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6"],
-        labels: ["PERSON INFO", "Name: ", "Gender: ", "Height: ", "Hair Color: ", "Skin Color: ", "Weight(kg): "],
+        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6", "#info7"],
+        labels: ["PERSON INFO", "Name: ", "Gender: ", "Height(cm): ", "Hair Color: ", "Skin Color: ", "Weight(kg): ", "Films: "],
         values: ["", result.name, result.gender, result.height, result.hair_color, result.skin_color, result.mass]
-    };
+    }];
 
-    masterArray.push(film);
-
-    for (var item in masterArray) {
-        if (masterArray[item].resource == "people") {
-            for (var i = 0; i < masterArray[item].output.length; i++) {
-                $(masterArray[item].output[i]).html(masterArray[item].labels[i] + masterArray[item].values[i]);
+    specialCall(result.films, "title", function (result) {
+        masterArray[0].values.push(result);
+            for (var i = 0; i < masterArray[0].output.length; i++) {
+                $(masterArray[0].output[i]).html(masterArray[0].labels[i] + masterArray[0].values[i]);
             }
-        }
-    }
+    });
 }
 
 function pushToArraySPECIES(result) {
-    var masterArray = [];
-    var film = {
+    var masterArray = [{
         resource: $("#resource").val(),
-        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6"],
-        labels: ["SPECIE INFO", "Name: ", "Language: ", "Classification: ", "Average Height: ", "Average Lifespan: ", "Hair Colors: "],
+        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6", "#info7"],
+        labels: ["SPECIE INFO", "Name: ", "Language: ", "Classification: ", "Average Height: ", "Average Lifespan: ", "Hair Colors: ", "Films: "],
         values: ["", result.name, result.language, result.classification, result.average_heights, result.average_lifespan, result.hair_colors]
-    };
+    }];
 
-    masterArray.push(film);
-
-    for (var item in masterArray) {
-        if (masterArray[item].resource == "species") {
-            for (var i = 0; i < masterArray[item].output.length; i++) {
-                $(masterArray[item].output[i]).html(masterArray[item].labels[i] + masterArray[item].values[i]);
-            }
+    specialCall(result.films, "title", function (result) {
+        masterArray[0].values.push(result);
+        for (var i = 0; i < masterArray[0].output.length; i++) {
+            $(masterArray[0].output[i]).html(masterArray[0].labels[i] + masterArray[0].values[i]);
         }
-    }
+    });
 }
 
 function pushToArraySTARSHIPS(result) {
-        var masterArray = [];
-        var film = {
+        var masterArray = [{
             resource: $("#resource").val(),
-            output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6"],
-            labels: ["STARSHIP INFO", "Name: ", "Model: ", "Passengers: ", "Manufacturer: ", "Crew: ", "Hyperdrive Rating: "],
+            output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6", "#info7"],
+            labels: ["STARSHIP INFO", "Name: ", "Model: ", "Passengers: ", "Manufacturer: ", "Crew: ", "Hyperdrive Rating: ", "Films: "],
             values: ["", result.name, result.model, result.passengers, result.manufacturer, result.crew, result.hyperdrive_rating]
-        };
-
-        masterArray.push(film);
-
-        for (var item in masterArray) {
-            if (masterArray[item].resource == "starships") {
-                for (var i = 0; i < masterArray[item].output.length; i++) {
-                    $(masterArray[item].output[i]).html(masterArray[item].labels[i] + masterArray[item].values[i]);
-                }
-            }
+        }];
+    specialCall(result.films, "title", function (result) {
+        masterArray[0].values.push(result);
+        for (var i = 0; i < masterArray[0].output.length; i++) {
+            $(masterArray[0].output[i]).html(masterArray[0].labels[i] + masterArray[0].values[i]);
         }
-    }
+    });
+}
 
 function pushToArrayVEHICLES(result) {
     var masterArray = [];
@@ -243,4 +247,3 @@ function search(name,resource) {
         return location;
     }
 }
-
