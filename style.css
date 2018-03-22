@@ -1,23 +1,28 @@
 #name{
     border-radius: 4px;
 }
+video{
+    padding: 1px;
+    margin: 1px;
+    height: 1px;
+    width: 1px;
+}
 .input{
     color: black;
 }
 body{
     color: white;
-    background-image: url(https://cdn.pixabay.com/photo/2016/01/27/15/25/space-1164579_960_720.png);
+    background-image: url("http://static.tumblr.com/aa8e817331ad1771ef2a2d3a479f3c5d/oixna1h/LTNobwkwe/tumblr_static_3wv6fctrjg2sg0gw0cokcoggo_2048_v2.jpg")
 }
 #center{
     text-align:center;
 }
-button{
+#button{
     position: relative;
     margin: 20px;
 }
 
 #banner{
-    background-image: url(https://cdn.pixabay.com/photo/2016/01/27/15/25/space-1164579_960_720.png);
 }
 
 h1{
@@ -27,7 +32,6 @@ h1{
     letter-spacing: 0px;
     text-shadow: 0px 0px #D3D3D3;
     padding-bottom: 20px;
-    background-image: url(https://cdn.pixabay.com/photo/2016/01/27/15/25/space-1164579_960_720.png);
 }
 
 h6{
@@ -40,16 +44,19 @@ h6{
     letter-spacing: 13px;
 }
 
-.left {
-    float: left;
-    width: 50%;
+table{
+    vertical-align: middle;
 }
 
-.right {
-    content: "";
-    display: table;
-    clear: both;
+#pauser{
+    background-color: black;
+    color: white;
+    height: 33px;
+    width: 50px;
+    font-size: 10px;
+}
+#image{
     position: relative;
-    margin-right:900px;
+    left: 750px;
+    bottom: 100px;
 }
-

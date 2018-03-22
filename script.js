@@ -1,8 +1,52 @@
-    $(document).ready(function(){
-        $("h1").css("transition","2000ms").delay(300).addClass("slide");
+//Star Wars program that lets user input name and displays info
+// -------------- by Jake Greenberg-Bell
+
+//Placeholder values for different names, films, etc.
+function placeholder(){
+    $("#message").html("");
+    var resource = $("#resource").val();
+    var name = $("#name");
+    switch(resource){
+        case "films":
+            $(name).attr("placeholder", "i.e. Return of the Jedi");
+            break;
+        case "planets":
+            $(name).attr("placeholder", "i.e. Endor");
+            break;
+        case "people":
+            $(name).attr("placeholder", "i.e. Jar Jar Binks");
+            break;
+        case "species":
+            $(name).attr("placeholder", "i.e. Droid");
+            break;
+        case "starships":
+            $(name).attr("placeholder", "i.e. Death Star");
+            break;
+        case "vehicles":
+            $(name).attr("placeholder", "i.e. X-34 Landspeeder");
+            break;
+    }
+}
+
+$(document).ready(function(){
+    $("h1").css("transition","2000ms").delay(300).addClass("slide");
+
+    //Plays and pauses music
+    $("#pauser").on("click", function(){
+        var pauser = document.getElementById("pauser");
+        var song = document.getElementById("song");
+        if(pauser.innerHTML == "Pause Music") {
+            song.pause();
+            pauser.innerHTML = "Play Music";
+        }else{
+            song.play();
+            pauser.innerHTML = "Pause Music";
+        }
     });
 
-function requestAPI(){
+
+
+    $("#button").on("click", function(){
     var resource = $("#resource").val();
     var name = $("#name").val();
     $.ajax({
@@ -33,7 +77,7 @@ function requestAPI(){
             }
         }
     });
-}
+});
 
 function specialCall(arr, type, completion) {
     var name = "";
@@ -42,7 +86,6 @@ function specialCall(arr, type, completion) {
             name += (result + ", ");
             i--;
             if(i == 0){
-                console.log(name);
                 completion(name);
             }
         });
@@ -142,52 +185,23 @@ function pushToArraySTARSHIPS(result) {
 }
 
 function pushToArrayVEHICLES(result) {
-    var masterArray = [];
-    var film = {
+    var masterArray = [{
         resource: $("#resource").val(),
-        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6"],
-        labels: ["VEHICLE INFO", "Name: ", "Model: ", "Passengers: ", "Manufacturer: ", "Consumables: ", "Vehicle Class: "],
+        output: ["#header1", "#info1", "#info2", "#info3", "#info4", "#info5", "#info6", "#info7"],
+        labels: ["VEHICLE INFO", "Name: ", "Model: ", "Passengers: ", "Manufacturer: ", "Consumables: ", "Vehicle Class: ", "Films: "],
         values: ["", result.name, result.model, result.passengers, result.manufacturer, result.consumables, result.vehicle_class]
-    };
+    }];
 
-    masterArray.push(film);
-
-    for (var item in masterArray) {
-        if (masterArray[item].resource == "vehicles") {
-            for (var i = 0; i < masterArray[item].output.length; i++) {
-                $(masterArray[item].output[i]).html(masterArray[item].labels[i] + masterArray[item].values[i]);
-            }
+    specialCall(result.films, "title", function (result) {
+        masterArray[0].values.push(result);
+        for (var i = 0; i < masterArray[0].output.length; i++) {
+            $(masterArray[0].output[i]).html(masterArray[0].labels[i] + masterArray[0].values[i]);
         }
-    }
+    });
 }
 
 
 
-function placeholder(){
-    $("#message").html("");
-    var resource = $("#resource").val();
-    var name = $("#name");
-    switch(resource){
-        case "films":
-            $(name).attr("placeholder", "i.e. Return of the Jedi");
-            break;
-        case "planets":
-            $(name).attr("placeholder", "i.e. Endor");
-            break;
-        case "people":
-            $(name).attr("placeholder", "i.e. Jar Jar Binks");
-            break;
-        case "species":
-            $(name).attr("placeholder", "i.e. Droid");
-            break;
-        case "starships":
-            $(name).attr("placeholder", "i.e. Death Star");
-            break;
-        case "vehicles":
-            $(name).attr("placeholder", "i.e. X-34 Landspeeder");
-            break;
-    }
-}
 
 
 function search(name,resource) {
@@ -240,10 +254,13 @@ function search(name,resource) {
     location += 1;
     if (location == 0) {
         $("#message").html("Nothing matches your search");
-        $(".left").html("");
+        $(".empty").html("");
 
     } else {
         $("#message").html("");
+        var changedName = name.replace(" ", "%20");
+        $("#image").hide();
+        $("#image").html("<img src='img/" + changedName + ".jpg' height='15%' width='15%'>").fadeIn(4000);
         return location;
     }
-}
+}});

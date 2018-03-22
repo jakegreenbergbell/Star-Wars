@@ -10,8 +10,9 @@
 
 </head>
 <body><div id="center">
-
+    <video autoplay id="song"><source src="http://www.thesoundarchive.com/starwars/star-wars-cantina-song.mp3" type="video/mp4"></video>
     <h1>STAR WARS iNFOCENTER</h1>
+    <button id="pauser">Pause Music</button>
     <div id="banner"><img src="img/starwars.png" height="29%" width="29%"></div>
     <p></p>
     What would you like to learn about:  <select id="resource" class="input" onchange="placeholder()">
@@ -24,23 +25,25 @@
 
     </select>
     What is its name?  <input type="text" id="name" class="form-inline input" placeholder="i.e. Return of the Jedi">
-    <p><button class="btn btn-default" onclick="requestAPI()">SEARCH</button></p>
+    <p><button class="btn btn-default" id="button">SEARCH</button></p>
     <div id="message"></div></div>
 
 <table>
-    <tr><h4 id="header1"></h4>
-        <th><div id="info1"></div></th>
-        <th><div id="info2"></div></th></tr>
+    <tr><h4 id="header1" class="empty"></h4>
+        <th width="500px"><div id="info1" class="empty"></div></th>
+        <th width="200px"><div id="info2" class="empty"></div></th></tr>
     <tr>
-        <th><div id="info3"></div></th>
-        <th><div id="info4"></div></th>
+        <th width="500px"><div id="info3" class="empty"></div></th>
+        <th width="200px"><div id="info4" class="empty"></div></th>
     </tr>
     <tr>
-        <th><div id="info5"></div></th>
-        <th><div id="info6"></div></th>
-        <th><div id="info7"></div></th>
+        <th width="500px"><div id="info5" class="empty"></div></th>
+        <th width="200px"><div id="info6" class="empty"></div></th>
+    </tr>
+    <tr>
+        <th width="500px"><div id="info7" class="empty"></div></th>
     </tr>
 </table>
-
+    <div id="image" class="empty"></div>
 </body>
 </html>
