@@ -28,7 +28,17 @@ function placeholder(){
     }
 }
 
+function width(){
+    var img = $("#bigImage");
+    var width = img.attr("width");
+    var height = img.attr("height");
+    return width;
+}
+
+
+
 $(document).ready(function(){
+    $("#detailImage").hide();
     $("h1").css("transition","2000ms").delay(300).addClass("slide");
 
     //Plays and pauses music
@@ -44,7 +54,19 @@ $(document).ready(function(){
         }
     });
 
+    //Enlarges images when clicked
+    $("#detailImage").on("click", function(){
+        $("#mask").css("display", "block");
+        var imgsrc = $("#detailImage").attr("src");
+        $("#bigImage").attr("src", imgsrc);
+        $("#bigImage").css("display", "block");
 
+    });
+
+    $("#mask").on("click", function(){
+       $("#mask").hide();
+       $("#bigImage").hide();
+    });
 
     $("#button").on("click", function(){
     var resource = $("#resource").val();
@@ -201,9 +223,6 @@ function pushToArrayVEHICLES(result) {
 }
 
 
-
-
-
 function search(name,resource) {
     name = name.toLowerCase();
     var films = ["a new hope", "the empire strikes back", "return of the jedi", "the phantom menace", "attack of the clones",
@@ -259,8 +278,7 @@ function search(name,resource) {
     } else {
         $("#message").html("");
         var changedName = name.replace(" ", "%20");
-        $("#image").hide();
-        $("#image").html("<img src='img/" + changedName + ".jpg' height='15%' width='15%'>").fadeIn(4000);
+        $("#detailImage").attr("src", "img/" + changedName + ".jpg").fadeIn(4000);
         return location;
     }
 }});

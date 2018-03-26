@@ -16,6 +16,7 @@ body{
 }
 #center{
     text-align:center;
+    position: relative;
 }
 #button{
     position: relative;
@@ -57,6 +58,27 @@ table{
 }
 #image{
     position: relative;
-    left: 750px;
-    bottom: 100px;
+    left: 850px;
+    bottom: 197px;
+    height: 80px;
+    width: 40px;
+}
+
+#mask{
+    height: 100%;
+    width: 100%;
+    background-color:grey;
+    opacity: .75;
+    z-index: 1;
+    display:none;
+    position: fixed;
+}
+
+#bigImage{
+    z-index: 2;
+    display: none;
+    position: fixed;
+    top: 250px;
+    left: 400px;
+
 }
