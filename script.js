@@ -28,17 +28,9 @@ function placeholder(){
     }
 }
 
-function width(){
-    var img = $("#bigImage");
-    var width = img.attr("width");
-    var height = img.attr("height");
-    return width;
-}
-
-
 
 $(document).ready(function(){
-    $("#detailImage").hide();
+    //Gives title coolness
     $("h1").css("transition","2000ms").delay(300).addClass("slide");
 
     //Plays and pauses music
@@ -59,15 +51,21 @@ $(document).ready(function(){
         $("#mask").css("display", "block");
         var imgsrc = $("#detailImage").attr("src");
         $("#bigImage").attr("src", imgsrc);
+        var width = $("#bigImage").width()/2;
+        var screenW = $("body").width()/2;
+        var W = screenW - width + "px";
+        $("#bigImage").css("left", W);
         $("#bigImage").css("display", "block");
 
     });
 
+    //When they click side of enlarged image it disappears
     $("#mask").on("click", function(){
        $("#mask").hide();
        $("#bigImage").hide();
     });
 
+    //Gathers resource location from user and makes API call
     $("#button").on("click", function(){
     var resource = $("#resource").val();
     var name = $("#name").val();
@@ -101,6 +99,7 @@ $(document).ready(function(){
     });
 });
 
+    //When searched thing has attributes that must be searched again
 function specialCall(arr, type, completion) {
     var name = "";
     for( var i = 0; i < arr.length; i++){
@@ -113,7 +112,6 @@ function specialCall(arr, type, completion) {
         });
     }
 }
-
     function runCall(url, type, completion) {
         $.ajax({
             url: url,
@@ -126,7 +124,7 @@ function specialCall(arr, type, completion) {
 
     }
 
-
+    //pushes info into the Page
 function pushToArrayFILM(result) {
     var masterArray = [{
         resource: $("#resource").val(),
@@ -222,7 +220,7 @@ function pushToArrayVEHICLES(result) {
     });
 }
 
-
+    //matches searched thing with place in API and shows image
 function search(name,resource) {
     name = name.toLowerCase();
     var films = ["a new hope", "the empire strikes back", "return of the jedi", "the phantom menace", "attack of the clones",
@@ -278,7 +276,8 @@ function search(name,resource) {
     } else {
         $("#message").html("");
         var changedName = name.replace(" ", "%20");
-        $("#detailImage").attr("src", "img/" + changedName + ".jpg").fadeIn(4000);
+        $("#detailImage").attr("src", "img/" + changedName + ".jpg").fadeIn(8000);
+        $("#imageMessage").fadeIn(4000);
         return location;
     }
 }});
